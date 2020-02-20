@@ -1,0 +1,24 @@
+[Unit]
+Description=Fight Club CAPTCHA bot
+Documentation=https://github.com/Kruhlmann/gatekeeper/blob/master/README.md
+After=network.target
+
+[Service]
+WorkingDirectory=<working_dir>
+ExecStart=/usr/bin/node <path the main.js>
+Restart=on-failure
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=gatekeeper
+Restart=always
+RestartSec=10
+CPUAccounting=true
+CPUQuota=20%
+Environment="GATEKEEPER_DB_USR=<db_user>"
+Environment="GATEKEEPER_DB_PWD=<db_password>"
+Environment="GATEKEEPER_DB_NAM=<db_name>"
+Environment="GATEKEEPER_DISCORD_TOKEN=<discord_token>"
+Environment="GATEKEEPER_SENTRY_DSN=[sentry_dsn]"
+
+[Install]
+WantedBy=multi-user.target
